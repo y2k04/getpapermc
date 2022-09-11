@@ -18,4 +18,4 @@ app.get('/', async (req, res) => {
     res.send(`${prefix}/versions/${ver}/builds/${latestBuild}/downloads/${downloadName}`);
 });
 
-app.listen(80, () => console.log("Server online."));
+app.listen(8080, () => console.log("Server online."));
