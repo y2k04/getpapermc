@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 
 app.get('/', async (req, res) => {
+    try{
     const prefix = "https://papermc.io/api/v2/projects/paper";
     const args = new URLSearchParams(url.parse(req.url).query);
     const ver = args.get('ver');
@@ -16,6 +17,7 @@ app.get('/', async (req, res) => {
     const latestBuild = builds[builds.length - 1];
     const {downloads: {application: {name: downloadName}}} = await fetch(`${prefix}/versions/${ver}/builds/${latestBuild}`).then((r) => r.json());
     res.send(`${prefix}/versions/${ver}/builds/${latestBuild}/downloads/${downloadName}`);
+    }catch{res.sendStatus(400)}
 });
 
 app.listen(process.env.PORT || 80, () => console.log("Server online."));
